@@ -1,54 +1,51 @@
 import React, { useState, useEffect } from "react";
 import Search from "./components/Search";
 import Player from "./components/Player";
-import SongsList from "./components/SongsList";
+import Song from "./components/Song";
 import axios from "axios";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  const [artist, setArtist] = useState([]);
-  const [errorMesage, setErrorMessage] = useState(null);
+  const [songsList, setSongsList] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const search = searchValue => {
     setLoading(true);
     setErrorMessage(null);
 
-    //   fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=4a3b711b`)
-    //     .then(response => )response.json()
-    //     .then(jsonResponse => {
-    //       if (jsonResponse.Response === "True") {
-    //         setArtist(jsonResponse.Search);
-    //         setLoading(false);
-    //       } else {
-    //         setErrorMessage(jsonResponse.Error);
-    //         setLoading(false);
-    //       }
-    //     });
-    // };
+    const axiosHeader = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "content-type": "application/json",
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+        "x-rapidapi-key": "fd5e535407msh96b57bf29ae745cp16744cjsne6da179ab6f5"
+      },
+      //use proxy server to solve cors issues
+      proxy: {
+        host: "104.236.174.88",
+        port: 3128
+      }
+    };
 
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://deezerdevs-deezer.p.rapidapi.com/artist/${searchValue}`,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "content-type": "application/json",
-            "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-            "x-rapidapi-key":
-              "fd5e535407msh96b57bf29ae745cp16744cjsne6da179ab6f5"
-          },
-          //use proxy server to solve cors issues
-          proxy: {
-            host: "104.236.174.88",
-            port: 3128
-          }
-        }
+        axiosHeader
       )
       .then(response => {
-        console.log(response);
+        const traklist = response.data.tracklist;
+        return axios.get(
+          `https://cors-anywhere.herokuapp.com/${traklist}`,
+          axiosHeader
+        );
+      })
+      .then(response => {
+        setSongsList(response.data.data);
+        console.log(response.data.data);
       })
       .catch(err => {
-        console.log(err);
+        setErrorMessage(err);
+        setLoading(false);
       });
   };
 
@@ -56,7 +53,15 @@ const App = () => {
     <div className="container">
       <Search search={search} />
       <Player />
-      <SongsList />
+      <div className="songs">
+        {loading && !setErrorMessage ? (
+          <span>Loading...</span>
+        ) : errorMessage ? (
+          <div className="errorMessage">{errorMessage}</div>
+        ) : (
+          songsList.map((song, index) => <Song key={`${index}`} song={song} index={index}/>)
+        )}
+      </div>
     </div>
   );
 };
