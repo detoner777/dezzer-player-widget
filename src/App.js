@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Search from "./components/Search";
 import Player from "./components/Player";
-import Song from "./components/Song";
+import SongsList from "./components/SongsLis";
 import axios from "axios";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [songsList, setSongsList] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const search = searchValue => {
     setLoading(true);
-    setErrorMessage(null);
+    setErrorMessage(false);
 
     const axiosHeader = {
       headers: {
@@ -42,25 +42,25 @@ const App = () => {
       .then(response => {
         setSongsList(response.data.data);
         console.log(response.data.data);
+        setLoading(false);
       })
       .catch(err => {
-        setErrorMessage(err);
-        setLoading(false);
+        setErrorMessage(err.message);
+
+        console.log(err.message);
       });
   };
 
   return (
     <div className="container">
       <Search search={search} />
-      <Player />
-      <div className="songs">
-        {loading && !setErrorMessage ? (
-          <span>Loading...</span>
-        ) : errorMessage ? (
-          <div className="errorMessage">{errorMessage}</div>
-        ) : (
-          songsList.map((song, index) => <Song key={`${index}`} song={song} index={index}/>)
-        )}
+      <div className="main-wrapper">
+        <Player />
+        <SongsList
+          loading={loading}
+          errorMessage={errorMessage}
+          songsList={songsList}
+        />
       </div>
     </div>
   );

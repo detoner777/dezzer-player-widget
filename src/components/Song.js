@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-function Song({ song, index }) {
+const Song = ({ song, index }) => {
   console.log(song);
 
   function timeFormat(time) {
@@ -17,12 +17,14 @@ function Song({ song, index }) {
   }
 
   return (
-    <div className="Song">
-      <p>Song {index+1}</p>
-      <span>{song.title}</span>
+    <div className="song">
+      <span>{index + 1}</span>
+      <a href={song.preview} className="song__title">
+        {song.title}
+      </a>
       <span>{timeFormat(song.duration)}</span>
     </div>
   );
-}
+};
 
 export default Song;
