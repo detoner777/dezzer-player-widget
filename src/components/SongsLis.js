@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Song from "./Song";
 
-function SongsList({ loading, errorMessage, songsList }) {
+const SongsList = ({ loading, errorMessage, songsList }) => {
   return (
     <div className="songs__list">
       {loading && !errorMessage ? (
@@ -15,6 +15,6 @@ function SongsList({ loading, errorMessage, songsList }) {
       )}
     </div>
   );
-}
+};
 
 export default SongsList;

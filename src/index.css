@@ -49,6 +49,19 @@
   box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
+.song__active {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 5px;
+  border-bottom: 1px solid rgb(139, 122, 122);
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  background-color: rgb(241, 211, 211);
+}
+
 .song__title {
   width: 100px;
   overflow: hidden;
