@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const campfireStory =
   "https://cdns-preview-e.dzcdn.net/stream/c-e7e6e2142422aa4599294dee57197be9-7.mp3";
@@ -18,7 +18,9 @@ const TRACKS = [
   { id: 2, title: "Booting Up" }
 ];
 
-class Player extends React.Component {
+const Player = () => {
+
+  
   state = {
     selectedTrack: null,
     player: "stopped",

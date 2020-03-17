@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-const Search = (props) => {
+const Search = props => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSearchInputChanges = e => {
@@ -30,15 +30,13 @@ const Search = (props) => {
           value={searchValue}
           onChange={handleSearchInputChanges}
         />
-        <Button
-          type="submit"
-          value="SEARCH"
-          onClick={callSearchFunction}
-        ></Button>
+        <Button type="submit" value="SEARCH" onClick={callSearchFunction}>
+          Start
+        </Button>
       </Form>
     </div>
   );
-}
+};
 
 export default Search;
 

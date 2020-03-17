@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Song = ({ song, index }) => {
-  const [toggleAtive, setToggleAtive] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(null);
-
+const Song = ({ song, index, active, setToggleAtive }) => {
   function timeFormat(time) {
     let hrs = ~~(time / 3600);
     let mins = ~~((time % 3600) / 60);
@@ -17,16 +14,10 @@ const Song = ({ song, index }) => {
     return ret;
   }
 
-  const useTrackSelected = () => {
-    setActiveIndex(index);
-    toggleAtive ? setToggleAtive(false) : setToggleAtive(true);
-    console.log(`${index + 1} ${toggleAtive}`);
-  };
-
   return (
     <div
-      className={(toggleAtive && index === activeIndex) ? "song__active" : "song"}
-      onClick={useTrackSelected}
+      className={active ? "song__active" : "song"}
+      onClick={() => setToggleAtive(index)}
     >
       <span>{index + 1}</span>
       <a href={song.preview} className="song__title">

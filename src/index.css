@@ -1,9 +1,24 @@
-::-webkit-scrollbar { width: 8px; height: 3px;}
-::-webkit-scrollbar-track {  background-color: #999;}
-::-webkit-scrollbar-track-piece { background-color: #ffffff;}
-::-webkit-scrollbar-thumb { height: 50px; background-color: rgb(172, 193, 207); border-radius: 3px;}
-::-webkit-scrollbar-corner { background-color: #999;}
-::-webkit-resizer { background-color: #666;}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 3px;
+}
+::-webkit-scrollbar-track {
+  background-color: #999;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: rgb(172, 193, 207);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-corner {
+  background-color: #999;
+}
+::-webkit-resizer {
+  background-color: #666;
+}
 
 .container {
   max-width: 900px;
@@ -14,6 +29,8 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+/* ----------------------------------Search Bar----------------------------------------- */
 
 .search {
   display: flex;
@@ -29,12 +46,13 @@
   max-width: 300px;
 }
 
+/* ------------------------------------Song+SongList-------------------------------------- */
+
 .songs__list {
   width: 300px;
   width: 300px;
   height: 400px;
   overflow-y: scroll;
-
 }
 
 .song {
@@ -67,4 +85,69 @@
   overflow: hidden;
   height: 40px;
   line-height: 40px;
+}
+
+/* --------------------------Player ----------------------------- */
+
+.player {
+  float: left;
+  width: 400px;
+  font-family: arial;
+}
+
+.tracklist {
+  float: left;
+  width: 100%;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.tracklist li {
+  background: salmon;
+  padding: 10px 20px;
+}
+
+.tracklist li:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buttons {
+  float: left;
+  width: 100%;
+}
+
+.buttons button {
+  float: left;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 0;
+  background: white;
+}
+
+.buttons button:hover {
+  background: salmon;
+  font-weight: bold;
+}
+
+.timebar {
+  float: left;
+  width: 100%;
+  height: 30px;
+  background: black;
+  color: white;
+}
+
+.bar {
+  float: left;
+}
+
+.time {
+  float: right;
+  text-align: center;
+  line-height: 30px;
+  width: 100px;
 }
