@@ -17,7 +17,7 @@ const Song = ({ song, index, active, setToggleAtive }) => {
   return (
     <div
       className={active ? "song__active" : "song"}
-      onClick={() => setToggleAtive(index)}
+      onClick={() => setToggleAtive((active = index))}
     >
       <span>{index + 1}</span>
       <a href={song.preview} className="song__title">

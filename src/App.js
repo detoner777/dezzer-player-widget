@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Search from "./components/Search";
-import Player from "./components/Player";
+// import Player from "./components/Player";
 import SongsList from "./components/SongsLis";
 import axios from "axios";
 
@@ -55,7 +55,7 @@ const App = () => {
     <div className="container">
       <Search search={search} />
       <div className="main-wrapper">
-        <Player />
+        {/* <Player /> */}
         <SongsList
           loading={loading}
           errorMessage={errorMessage}

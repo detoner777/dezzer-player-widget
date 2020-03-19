@@ -18,6 +18,16 @@ const TRACKS = [
   { id: 2, title: "Booting Up" }
 ];
 
+// const TRACKS = songsList.map((song, index) => (
+//   <Song
+//     key={`${index}`}
+//     song={song}
+//     index={index}
+//     active={toggleAtive === index}
+//     setToggleAtive={setToggleAtive}
+//   />
+// ));
+
 class Player extends React.Component {
   state = {
     selectedTrack: null,
@@ -32,6 +42,7 @@ class Player extends React.Component {
         currentTime: e.target.currentTime,
         duration: e.target.duration
       });
+      console.log(this.props);
     });
   }
 
