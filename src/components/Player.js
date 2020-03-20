@@ -12,21 +12,11 @@ function getTime(time) {
     );
   }
 }
-
-const TRACKS = [
-  { id: 1, title: "Campfire Story" },
-  { id: 2, title: "Booting Up" }
-];
-
-// const TRACKS = songsList.map((song, index) => (
-//   <Song
-//     key={`${index}`}
-//     song={song}
-//     index={index}
-//     active={toggleAtive === index}
-//     setToggleAtive={setToggleAtive}
-//   />
-// ));
+const TRACKS = [];
+// const TRACKS = [
+//   { id: 1, title: "Campfire Story" },
+//   { id: 2, title: "Booting Up" }
+// ];
 
 class Player extends React.Component {
   state = {
@@ -42,7 +32,6 @@ class Player extends React.Component {
         currentTime: e.target.currentTime,
         duration: e.target.duration
       });
-      console.log(this.props);
     });
   }
 
@@ -128,6 +117,7 @@ class Player extends React.Component {
   };
 
   render() {
+    const TRACKS = this.props.songsList;
     const list = TRACKS.map(item => {
       return (
         <li
