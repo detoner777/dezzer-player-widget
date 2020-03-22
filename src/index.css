@@ -50,7 +50,6 @@
 
 .songs__list {
   width: 300px;
-  width: 300px;
   height: 400px;
   overflow-y: scroll;
 }
@@ -88,7 +87,7 @@
 }
 
 /* --------------------------Player ----------------------------- */
-.player-list{
+.player-list {
   display: flex;
   justify-content: space-between;
 }
@@ -105,6 +104,8 @@
   font-size: 16px;
   margin: 0;
   padding: 0;
+  height: 400px;
+  overflow-y: scroll;
 }
 
 .tracklist li {

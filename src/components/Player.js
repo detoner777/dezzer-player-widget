@@ -12,7 +12,7 @@ function getTime(time) {
     );
   }
 }
-const TRACKS = [];
+let TRACKS = [];
 // const TRACKS = [
 //   { id: 1, title: "Campfire Story" },
 //   { id: 2, title: "Booting Up" }
@@ -20,13 +20,14 @@ const TRACKS = [];
 
 class Player extends React.Component {
   state = {
-    selectedTrack: null,
+    selectedTrack: this.props.activeIndex,
     player: "stopped",
     currentTime: null,
     duration: null
   };
 
   componentDidMount() {
+    // TRACKS = this.props.songsList.map((x, i) => ({ ...x, id: i }));
     this.player.addEventListener("timeupdate", e => {
       this.setState({
         currentTime: e.target.currentTime,
@@ -41,17 +42,25 @@ class Player extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.selectedTrack !== prevState.selectedTrack) {
+      TRACKS = this.props.songsList.map((x, i) => ({ ...x, id: i }));
       let track;
-      switch (this.state.selectedTrack) {
-        case "Campfire Story":
-          track = campfireStory;
-          break;
-        case "Booting Up":
-          track = bootingUp;
-          break;
-        default:
-          break;
+
+      if (this.state.selectedTrack !== null) {
+        track = TRACKS.find(track => track.id === this.state.selectedTrack)
+          .preview;
       }
+
+      // let track;
+      // switch (this.state.selectedTrack) {
+      //   case 0:
+      //     track = campfireStory;
+      //     break;
+      //   case 1:
+      //     track = bootingUp;
+      //     break;
+      //   default:
+      //     break;
+      // }
       if (track) {
         this.player.src = track;
         this.player.play();
@@ -63,8 +72,12 @@ class Player extends React.Component {
         this.player.pause();
       } else if (this.state.player === "stopped") {
         this.player.pause();
-        this.player.currentTime = 0;
-        this.setState({ selectedTrack: null });
+        this.setState({
+          selectedTrack: null,
+          player: "stopped",
+          currentTime: null,
+          duration: null
+        });
       } else if (
         this.state.player === "playing" &&
         prevState.player === "paused"
@@ -77,8 +90,9 @@ class Player extends React.Component {
       !isNaN(this.state.duration) &&
       this.state.duration === this.state.currentTime
     ) {
+      // TRACKS = this.props.songsList.map((x, i) => ({ ...x, id: i }));
       const currentTrackIndex = TRACKS.findIndex(
-        track => track.title === this.state.selectedTrack
+        track => track.id === this.state.selectedTrack
       );
       const tracksAmount = TRACKS.length - 1;
       if (currentTrackIndex === tracksAmount) {
@@ -95,20 +109,33 @@ class Player extends React.Component {
   }
 
   handleSkip = direction => {
-    const currentTrackIndex = TRACKS.findIndex(
-      track => track.title === this.state.selectedTrack
-    );
-    const tracksAmount = TRACKS.length - 1;
+    // const currentTrackIndex = TRACKS.findIndex(
+    //   track => track.id === this.state.selectedTrack
+    // );
+    // const tracksAmount = TRACKS.length - 1;
     if (direction === "previous") {
-      const previousTrack =
-        currentTrackIndex === 0 ? tracksAmount : currentTrackIndex - 1;
-      const trackToPlay = TRACKS[previousTrack];
-      this.setState({ selectedTrack: trackToPlay.title });
+      // const previousTrack =
+      //   currentTrackIndex === 0 ? tracksAmount : currentTrackIndex - 1;
+      // const trackToPlay = this.state.selectedTrack - 1;
+
+      // !this.state.selectedTrack
+      //   ? this.setState({ selectedTrack: this.state.selectedTrack - 1 })
+      //   : this.setState({ selectedTrack: this.state.selectedTrack });
+      this.setState({
+        selectedTrack: this.state.selectedTrack
+          ? this.state.selectedTrack - 1
+          : this.state.selectedTrack
+      });
     } else if (direction === "next") {
-      const nextTrack =
-        currentTrackIndex === tracksAmount ? 0 : currentTrackIndex + 1;
-      const trackToPlay = TRACKS[nextTrack];
-      this.setState({ selectedTrack: trackToPlay.title, duration: null });
+      // const nextTrack =
+      //   currentTrackIndex === tracksAmount ? 0 : currentTrackIndex + 1;
+      // const trackToPlay = TRACKS[nextTrack];
+      this.setState({
+        selectedTrack:
+          this.state.selectedTrack < TRACKS.length - 1
+            ? this.state.selectedTrack + 1
+            : this.state.selectedTrack
+      });
     }
   };
 
@@ -117,14 +144,15 @@ class Player extends React.Component {
   };
 
   render() {
-    const TRACKS = this.props.songsList;
-    const list = TRACKS.map(item => {
+    let TRACKS = this.props.songsList;
+    console.log(this.state);
+    const list = TRACKS.map((item, index) => {
       return (
         <li
-          key={item.id}
-          onClick={() => this.setState({ selectedTrack: item.title })}
+          key={index}
+          onClick={() => this.setState({ selectedTrack: index })}
           style={{
-            fontWeight: item.title === this.state.selectedTrack && "bold"
+            fontWeight: index === this.state.selectedTrack && "bold"
           }}
         >
           {item.title}

@@ -16,7 +16,7 @@ class SongsList extends Component {
     return (
       <div className="player-list">
         <Player
-          active={toggleAtive}
+          activeIndex={toggleAtive}
           setToggleAtive={setToggleAtive}
           songsList={songsList}
         />
@@ -36,6 +36,7 @@ class SongsList extends Component {
                   this.setState({
                     toggleAtive: index
                   });
+                  console.log(this.state.toggleAtive);
                 }}
               />
             ))

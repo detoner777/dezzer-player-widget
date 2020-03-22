@@ -46,7 +46,6 @@ const App = () => {
       })
       .catch(err => {
         setErrorMessage(err.message);
-
         console.log(err.message);
       });
   };
