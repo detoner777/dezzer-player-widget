@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Search from "./components/Search";
 // import Player from "./components/Player";
 import SongsList from "./components/SongsLis";
 import axios from "axios";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -51,17 +53,19 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <Search search={search} />
-      <div className="main-wrapper">
-        {/* <Player /> */}
-        <SongsList
-          loading={loading}
-          errorMessage={errorMessage}
-          songsList={songsList}
-        />
+    <Provider store={store}>
+      <div className="container">
+        <Search search={search} />
+        <div className="main-wrapper">
+          {/* <Player /> */}
+          <SongsList
+            loading={loading}
+            errorMessage={errorMessage}
+            songsList={songsList}
+          />
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 };
 
