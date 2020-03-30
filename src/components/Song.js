@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const Song = ({ song, index, active, setToggleAtive }) => {
   function timeFormat(time) {
@@ -17,7 +17,7 @@ const Song = ({ song, index, active, setToggleAtive }) => {
   return (
     <div
       className={active ? "song__active" : "song"}
-      onClick={() => setToggleAtive(index)}
+      onClick={() => setToggleAtive((active = index))}
     >
       <span>{index + 1}</span>
       <a href={song.preview} className="song__title">

@@ -24,11 +24,11 @@
   max-width: 900px;
   margin-top: 50px;
 }
-.main-wrapper {
+/* .main-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
+} */
 
 /* ----------------------------------Search Bar----------------------------------------- */
 
@@ -49,7 +49,6 @@
 /* ------------------------------------Song+SongList-------------------------------------- */
 
 .songs__list {
-  width: 300px;
   width: 300px;
   height: 400px;
   overflow-y: scroll;
@@ -88,6 +87,10 @@
 }
 
 /* --------------------------Player ----------------------------- */
+.player-list {
+  display: flex;
+  justify-content: space-between;
+}
 
 .player {
   float: left;
@@ -101,6 +104,8 @@
   font-size: 16px;
   margin: 0;
   padding: 0;
+  height: 400px;
+  overflow-y: scroll;
 }
 
 .tracklist li {
