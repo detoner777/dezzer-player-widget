@@ -1,8 +1,10 @@
 import {
-  fetchSongsLoding,
-  fetchProductsSuccess,
-  fetchProductsError
+  fetchSongsLoading,
+  fetchSongsSuccess,
+  fetchSongsError
 } from "./fetchLoadingErr";
+
+import axios from "axios";
 
 const axiosHeader = {
   headers: {
@@ -19,32 +21,34 @@ const axiosHeader = {
 };
 
 function fetchSongs(searchValue) {
-  dispatch(fetchSongsLoding(true));
-  axios
-    .get(
-      `https://cors-anywhere.herokuapp.com/https://deezerdevs-deezer.p.rapidapi.com/artist/${searchValue}`,
-      axiosHeader
-    )
-    .then(response => {
-      const traklist = response.data.tracklist;
-      return axios.get(
-        `https://cors-anywhere.herokuapp.com/${traklist}`,
+  return dispatch => {
+    dispatch(fetchSongsLoading(true));
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/https://deezerdevs-deezer.p.rapidapi.com/artist/${searchValue}`,
         axiosHeader
-      );
-    })
-    .then(response => {
-      dispatch(fetchProductsSuccess(response.songsList));
-      dispatch(fetchSongsLoding(false));
-      return response.songsList;
+      )
+      .then(response => {
+        const traklist = response.data.tracklist;
+        return axios.get(
+          `https://cors-anywhere.herokuapp.com/${traklist}`,
+          axiosHeader
+        );
+      })
+      .then(response => {
+        dispatch(fetchSongsSuccess(response.songsList));
+        dispatch(fetchSongsLoading(false));
+        return response.songsList;
 
-      //   setSongsList(response.data.data);
-      //   console.log(response.data.data);
-      //   setLoading(false);
-    })
-    .catch(err => {
-      dispatch(fetchProductsError(err));
-      //   setErrorMessage(err.message);
-    });
+        //   setSongsList(response.data.data);
+        //   console.log(response.data.data);
+        //   setLoading(false);
+      })
+      .catch(err => {
+        dispatch(fetchSongsError(err));
+        //   setErrorMessage(err.message);
+      });
+  };
 }
 
 export default fetchSongs;

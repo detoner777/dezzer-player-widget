@@ -1,4 +1,15 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import fetchSongsAction from "./actions/fetchSongs";
+import {
+  getLoadingError,
+  getSongs,
+  getSongsLoading
+} from "./reducers/songsReducer";
+
 import Search from "./components/Search";
 // import Player from "./components/Player";
 import SongsList from "./components/SongsLis";

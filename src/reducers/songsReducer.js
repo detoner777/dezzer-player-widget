@@ -33,5 +33,5 @@ export function songsReducer(state = initialState, action) {
 }
 
 export const getSongs = state => state.songsList;
-export const getSongsPending = state => state.loading;
-export const getProductsError = state => state.error;
+export const getSongsLoading = state => state.loading;
+export const getLoadingError = state => state.error;
