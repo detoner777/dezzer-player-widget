@@ -2,22 +2,31 @@ import React, { Component } from "react";
 import Song from "./Song";
 import Player from "./Player";
 
+import { connect } from "react-redux";
+import { setToggleActive } from "../actions/SetToggleActive";
+
 class SongsList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      toggleAtive: ""
-    };
+  constructor(props) {
+    super(props);
+    // this.state = {
+    //   toggleAtive: "",
+    // };
   }
 
   render() {
-    const { loading, errorMessage, songsList } = this.props;
-    const { toggleAtive, setToggleAtive } = this.state;
+    const {
+      loading,
+      errorMessage,
+      songsList,
+      toggleActive,
+      setToggleActive,
+    } = this.props;
+    // const { toggleAtive, setToggleAtive } = this.state;
     return (
       <div className="player-list">
         <Player
-          activeIndex={toggleAtive}
-          setToggleAtive={setToggleAtive}
+          activeIndex={toggleActive}
+          setToggleAtive={setToggleActive}
           songsList={songsList}
         />
         <div className="songs__list">
@@ -31,13 +40,18 @@ class SongsList extends Component {
                 key={`${index}`}
                 song={song}
                 index={index}
-                active={toggleAtive === index}
-                setToggleAtive={() => {
-                  this.setState({
-                    toggleAtive: index
-                  });
-                  console.log(this.state.toggleAtive);
+                active={toggleActive === index}
+                setToggleActive={() => {
+                  setToggleActive(index);
+                  console.log(toggleActive);
                 }}
+
+                // setToggleActive={() => {
+                //   this.setState({
+                //     toggleAtive: index,
+                //   });
+
+                // }}
               />
             ))
           )}
@@ -47,4 +61,12 @@ class SongsList extends Component {
   }
 }
 
-export default SongsList;
+const mapDispatchToProps = {
+  setToggleActive,
+};
+
+const mapStateToProps = (state) => ({
+  toggleActive: state.toggleActiveReducer.toggleActive,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongsList);

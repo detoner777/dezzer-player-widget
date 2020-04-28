@@ -1,13 +1,13 @@
 import {
   FETCH_SONGS_ERROR,
   FETCH_SONGS_LOADING,
-  FETCH_SONGS_SUCCESS
+  FETCH_SONGS_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
   loading: false,
   songsList: [],
-  error: null
+  error: null,
 };
 
 export function songsReducer(state = initialState, action) {
@@ -15,23 +15,23 @@ export function songsReducer(state = initialState, action) {
     case FETCH_SONGS_LOADING:
       return {
         ...state,
-        loading: action.loading
+        loading: action.loading,
       };
     case FETCH_SONGS_SUCCESS:
       return {
         ...state,
-        songsList: action.payload
+        songsList: action.songsList,
       };
     case FETCH_SONGS_ERROR:
       return {
         ...state,
-        error: action.error
+        error: action.error,
       };
     default:
       return state;
   }
 }
 
-export const getSongs = state => state.songsList;
-export const getSongsPending = state => state.loading;
-export const getProductsError = state => state.error;
+// export const getSongs = (state) => state.songsList;
+// export const getSongsPending = (state) => state.loading;
+// export const getProductsError = (state) => state.error;
