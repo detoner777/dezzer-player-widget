@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { songsReducer } from "./songsReducer";
 
-export default combineReducers({
-  songsReducer: songsReducer
-});
+import { songsReducer } from "./songsReducer";
+import { toggleActiveReducer } from "./toggleActiveReducer";
+
+export default combineReducers({ songsReducer, toggleActiveReducer });

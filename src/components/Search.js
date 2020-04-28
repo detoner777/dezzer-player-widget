@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { fetchSongsError } from "../actions/fetchLoadingErr";
 
-const Search = props => {
+const Search = (props) => {
   const [searchValue, setSearchValue] = useState("");
 
-  const handleSearchInputChanges = e => {
+  const handleSearchInputChanges = (e) => {
     setSearchValue(e.target.value);
   };
 
@@ -12,10 +14,11 @@ const Search = props => {
     setSearchValue("");
   };
 
-  const callSearchFunction = e => {
+  const callSearchFunction = (e) => {
     e.preventDefault();
     props.search(searchValue);
     resetInputField();
+    props.fetchSongsError(null);
   };
 
   return (
@@ -38,6 +41,10 @@ const Search = props => {
   );
 };
 
-export default Search;
+const mapDispatchToProps = {
+  fetchSongsError,
+};
+
+export default connect(null, mapDispatchToProps)(Search);
 
 // https://codesandbox.io/s/react-autosuggest-example-with-hooks-mreii
