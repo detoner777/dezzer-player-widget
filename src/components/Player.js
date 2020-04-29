@@ -1,9 +1,7 @@
 import React from "react";
 
-const campfireStory =
-  "https://cdns-preview-e.dzcdn.net/stream/c-e7e6e2142422aa4599294dee57197be9-7.mp3";
-const bootingUp =
-  "https://cdns-preview-1.dzcdn.net/stream/c-13039fed16a173733f227b0bec631034-10.mp3";
+import { connect } from "react-redux";
+import { setToggleActive } from "../actions/SetToggleActive";
 
 function getTime(time) {
   if (!isNaN(time)) {
@@ -13,25 +11,19 @@ function getTime(time) {
   }
 }
 let TRACKS = [];
-// const TRACKS = [
-//   { id: 1, title: "Campfire Story" },
-//   { id: 2, title: "Booting Up" }
-// ];
 
 class Player extends React.Component {
   state = {
-    selectedTrack: this.props.activeIndex,
     player: "stopped",
     currentTime: null,
-    duration: null
+    duration: null,
   };
 
   componentDidMount() {
-    // TRACKS = this.props.songsList.map((x, i) => ({ ...x, id: i }));
-    this.player.addEventListener("timeupdate", e => {
+    this.player.addEventListener("timeupdate", (e) => {
       this.setState({
         currentTime: e.target.currentTime,
-        duration: e.target.duration
+        duration: e.target.duration,
       });
     });
   }
@@ -41,26 +33,15 @@ class Player extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.selectedTrack !== prevState.selectedTrack) {
+    if (this.props.toggleActive !== prevProps.toggleActive) {
       TRACKS = this.props.songsList.map((x, i) => ({ ...x, id: i }));
       let track;
 
-      if (this.state.selectedTrack !== null) {
-        track = TRACKS.find(track => track.id === this.state.selectedTrack)
+      if (this.props.toggleActive !== null) {
+        track = TRACKS.find((track) => track.id === this.props.toggleActive)
           .preview;
       }
 
-      // let track;
-      // switch (this.state.selectedTrack) {
-      //   case 0:
-      //     track = campfireStory;
-      //     break;
-      //   case 1:
-      //     track = bootingUp;
-      //     break;
-      //   default:
-      //     break;
-      // }
       if (track) {
         this.player.src = track;
         this.player.play();
@@ -72,11 +53,11 @@ class Player extends React.Component {
         this.player.pause();
       } else if (this.state.player === "stopped") {
         this.player.pause();
+        this.props.setToggleActive(null);
         this.setState({
-          selectedTrack: null,
           player: "stopped",
           currentTime: null,
-          duration: null
+          duration: null,
         });
       } else if (
         this.state.player === "playing" &&
@@ -92,54 +73,38 @@ class Player extends React.Component {
     ) {
       // TRACKS = this.props.songsList.map((x, i) => ({ ...x, id: i }));
       const currentTrackIndex = TRACKS.findIndex(
-        track => track.id === this.state.selectedTrack
+        (track) => track.id === this.props.toggleActive
       );
       const tracksAmount = TRACKS.length - 1;
       if (currentTrackIndex === tracksAmount) {
+        this.props.setToggleActive(null);
         this.setState({
-          selectedTrack: null,
           player: "stopped",
           currentTime: null,
-          duration: null
+          duration: null,
         });
       } else {
         this.handleSkip("next");
       }
     }
   }
-
-  handleSkip = direction => {
-    // const currentTrackIndex = TRACKS.findIndex(
-    //   track => track.id === this.state.selectedTrack
-    // );
-    // const tracksAmount = TRACKS.length - 1;
+  handleSkip = (direction) => {
     if (direction === "previous") {
-      // const previousTrack =
-      //   currentTrackIndex === 0 ? tracksAmount : currentTrackIndex - 1;
-      // const trackToPlay = this.state.selectedTrack - 1;
-
-      // !this.state.selectedTrack
-      //   ? this.setState({ selectedTrack: this.state.selectedTrack - 1 })
-      //   : this.setState({ selectedTrack: this.state.selectedTrack });
-      this.setState({
-        selectedTrack: this.state.selectedTrack
-          ? this.state.selectedTrack - 1
-          : this.state.selectedTrack
-      });
+      this.props.setToggleActive(
+        this.props.toggleActive
+          ? this.props.toggleActive - 1
+          : this.props.toggleActive
+      );
     } else if (direction === "next") {
-      // const nextTrack =
-      //   currentTrackIndex === tracksAmount ? 0 : currentTrackIndex + 1;
-      // const trackToPlay = TRACKS[nextTrack];
-      this.setState({
-        selectedTrack:
-          this.state.selectedTrack < TRACKS.length - 1
-            ? this.state.selectedTrack + 1
-            : this.state.selectedTrack
-      });
+      this.props.setToggleActive(
+        this.props.toggleActive < TRACKS.length - 1
+          ? this.props.toggleActive + 1
+          : this.props.toggleActive
+      );
     }
   };
 
-  setTime = time => {
+  setTime = (time) => {
     this.player.currentTime = time;
   };
 
@@ -150,18 +115,17 @@ class Player extends React.Component {
       return (
         <li
           key={index}
-          onClick={() => this.setState({ selectedTrack: index })}
+          onClick={() => {
+            setToggleActive(index);
+          }}
           style={{
-            fontWeight: index === this.state.selectedTrack && "bold"
+            fontWeight: index === this.props.toggleActive && "bold",
           }}
         >
           {item.title}
         </li>
       );
     });
-
-    // const currentTime = getTime(this.state.currentTime);
-    // const duration = getTime(this.state.duration);
 
     return (
       <>
@@ -194,7 +158,7 @@ class Player extends React.Component {
             </div>
           )}
         </div>
-        <audio ref={ref => (this.player = ref)} />
+        <audio ref={(ref) => (this.player = ref)} />
       </>
     );
   }
@@ -209,7 +173,7 @@ function TimeBar({ currentTime, duration, setTime }) {
     sBits.push(count);
     count++;
   }
-  const seconds = sBits.map(second => {
+  const seconds = sBits.map((second) => {
     return (
       <div
         key={second}
@@ -223,7 +187,7 @@ function TimeBar({ currentTime, duration, setTime }) {
             currentTime && Math.round(currentTime) === second
               ? "white"
               : "black",
-          transition: "all 0.5s ease-in-out"
+          transition: "all 0.5s ease-in-out",
         }}
       />
     );
@@ -242,4 +206,12 @@ function TimeBar({ currentTime, duration, setTime }) {
   );
 }
 
-export default Player;
+const mapDispatchToProps = {
+  setToggleActive,
+};
+
+const mapStateToProps = (state) => ({
+  toggleActive: state.toggleActiveReducer.toggleActive,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Player);

@@ -20,9 +20,8 @@ const Song = ({ song, index, active, setToggleActive }) => {
       onClick={() => setToggleActive((active = index))}
     >
       <span>{index + 1}</span>
-      <a href={song.preview} className="song__title">
-        {song.title}
-      </a>
+      <span className="song__title">{song.title}</span>
+
       <span>{timeFormat(song.duration)}</span>
     </div>
   );

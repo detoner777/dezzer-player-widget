@@ -8,9 +8,6 @@ import { setToggleActive } from "../actions/SetToggleActive";
 class SongsList extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   toggleAtive: "",
-    // };
   }
 
   render() {
@@ -21,14 +18,10 @@ class SongsList extends Component {
       toggleActive,
       setToggleActive,
     } = this.props;
-    // const { toggleAtive, setToggleAtive } = this.state;
+
     return (
       <div className="player-list">
-        <Player
-          activeIndex={toggleActive}
-          setToggleAtive={setToggleActive}
-          songsList={songsList}
-        />
+        <Player songsList={songsList} />
         <div className="songs__list">
           {loading && !errorMessage ? (
             <span>Loading...</span>
@@ -43,15 +36,8 @@ class SongsList extends Component {
                 active={toggleActive === index}
                 setToggleActive={() => {
                   setToggleActive(index);
-                  console.log(toggleActive);
+                  // console.log(toggleActive);
                 }}
-
-                // setToggleActive={() => {
-                //   this.setState({
-                //     toggleAtive: index,
-                //   });
-
-                // }}
               />
             ))
           )}
