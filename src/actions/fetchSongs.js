@@ -40,14 +40,9 @@ function fetchSongs(searchValue) {
         console.log(response.data.data);
         dispatch(fetchSongsLoading(false));
         return response.songsList;
-
-        //   setSongsList(response.data.data);
-        //   console.log(response.data.data);
-        //   setLoading(false);
       })
       .catch((err) => {
         dispatch(fetchSongsError(err.message));
-        //   setErrorMessage(err.message);
       });
   };
 }

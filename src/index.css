@@ -24,11 +24,11 @@
   max-width: 900px;
   margin-top: 50px;
 }
-/* .main-wrapper {
+.main-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-} */
+}
 
 /* ----------------------------------Search Bar----------------------------------------- */
 
@@ -72,6 +72,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  color: rgb(83, 83, 201);
+  font-weight: 600;
   margin: 5px;
   padding: 5px;
   border-bottom: 1px solid rgb(139, 122, 122);
