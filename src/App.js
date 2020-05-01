@@ -3,6 +3,7 @@ import Search from "./components/Search";
 import SongsList from "./components/SongsLis";
 import { connect } from "react-redux";
 import fetchSongs from "./actions/fetchSongs";
+import Player from "./components/Player";
 
 const App = ({ fetchSongs, loading, errorMessage, songsList }) => {
   const search = (searchValue) => {
@@ -13,6 +14,7 @@ const App = ({ fetchSongs, loading, errorMessage, songsList }) => {
     <div className="container">
       <Search search={search} />
       <div className="main-wrapper">
+        <Player songsList={songsList} />
         <SongsList
           loading={loading}
           errorMessage={errorMessage}

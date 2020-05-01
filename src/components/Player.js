@@ -10,6 +10,7 @@ function getTime(time) {
     );
   }
 }
+
 let TRACKS = [];
 
 class Player extends React.Component {
@@ -17,6 +18,7 @@ class Player extends React.Component {
     player: "stopped",
     currentTime: null,
     duration: null,
+    title: null,
   };
 
   componentDidMount() {
@@ -43,9 +45,16 @@ class Player extends React.Component {
       }
 
       if (track) {
+        //set active track title to the player
+        let activeTrack = this.props.songsList[this.props.toggleActive];
+        //
         this.player.src = track;
         this.player.play();
-        this.setState({ player: "playing", duration: this.player.duration });
+        this.setState({
+          player: "playing",
+          duration: this.player.duration,
+          title: activeTrack.title,
+        });
       }
     }
     if (this.state.player !== prevState.player) {
@@ -71,7 +80,6 @@ class Player extends React.Component {
       !isNaN(this.state.duration) &&
       this.state.duration === this.state.currentTime
     ) {
-      // TRACKS = this.props.songsList.map((x, i) => ({ ...x, id: i }));
       const currentTrackIndex = TRACKS.findIndex(
         (track) => track.id === this.props.toggleActive
       );
@@ -88,6 +96,7 @@ class Player extends React.Component {
       }
     }
   }
+
   handleSkip = (direction) => {
     if (direction === "previous") {
       this.props.setToggleActive(
@@ -109,28 +118,10 @@ class Player extends React.Component {
   };
 
   render() {
-    let TRACKS = this.props.songsList;
-    console.log(this.state);
-    const list = TRACKS.map((item, index) => {
-      return (
-        <li
-          key={index}
-          onClick={() => {
-            setToggleActive(index);
-          }}
-          style={{
-            fontWeight: index === this.props.toggleActive && "bold",
-          }}
-        >
-          {item.title}
-        </li>
-      );
-    });
-
     return (
       <>
         <div className="player">
-          <ul className="tracklist">{list}</ul>
+          <ul className="tracklist">{this.state.title}</ul>
           <TimeBar
             setTime={this.setTime}
             currentTime={this.state.currentTime}

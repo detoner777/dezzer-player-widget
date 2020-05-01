@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Song from "./Song";
-import Player from "./Player";
 
 import { connect } from "react-redux";
 import { setToggleActive } from "../actions/SetToggleActive";
@@ -21,7 +20,6 @@ class SongsList extends Component {
 
     return (
       <div className="player-list">
-        <Player songsList={songsList} />
         <div className="songs__list">
           {loading && !errorMessage ? (
             <span>Loading...</span>
