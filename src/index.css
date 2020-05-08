@@ -30,6 +30,10 @@
   justify-content: space-between;
 }
 
+.body  {
+  background: #666;
+}
+
 /* ----------------------------------Search Bar----------------------------------------- */
 
 .search {

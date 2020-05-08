@@ -1,10 +1,29 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
+
 import { connect } from "react-redux";
 import { fetchSongsError } from "../actions/fetchLoadingErr";
 
+//input styling
+const useStyles = makeStyles((theme) => ({
+  input: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
+  button: {
+    width: "100px",
+    height: "56px",
+  },
+}));
+
 const Search = (props) => {
   const [searchValue, setSearchValue] = useState("");
+  const classes = useStyles();
 
   const handleSearchInputChanges = (e) => {
     setSearchValue(e.target.value);
@@ -23,20 +42,27 @@ const Search = (props) => {
 
   return (
     <div className="search">
-      <div>VISAGE</div>
-
-      <Form className="search__form">
-        {" "}
-        <Form.Control
-          type="text"
-          placeholder="Search"
+      <form className={classes.input} noValidate autoComplete="off">
+        <TextField
+          id="outlined-secondary"
+          label="Tab an artist"
+          variant="outlined"
+          color="secondary"
           value={searchValue}
           onChange={handleSearchInputChanges}
         />
-        <Button type="submit" value="SEARCH" onClick={callSearchFunction}>
-          Start
+        <Button
+          className={classes.button}
+          variant="outlined"
+          color="secondary"
+          endIcon={<SearchIcon />}
+          type="submit"
+          value="SEARCH"
+          onClick={callSearchFunction}
+        >
+          Search
         </Button>
-      </Form>
+      </form>
     </div>
   );
 };
