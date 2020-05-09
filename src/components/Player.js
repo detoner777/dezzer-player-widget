@@ -1,7 +1,29 @@
 import React from "react";
+import PlayerCard from "./PlayerCard/PlayerCard";
+
+import IconButton from "@material-ui/core/IconButton";
+import PlayIcon from "@material-ui/icons/PlayArrow";
+import PauseIcon from "@material-ui/icons/PauseOutlined";
+import StopIcon from "@material-ui/icons/StopOutlined";
+import PrevIcon from "@material-ui/icons/SkipPreviousOutlined";
+import NextIcon from "@material-ui/icons/SkipNextOutlined";
+
+import { withStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import { connect } from "react-redux";
 import { setToggleActive } from "../actions/SetToggleActive";
+
+const useStyles = (theme) => ({
+  button: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+});
 
 function getTime(time) {
   if (!isNaN(time)) {
@@ -18,7 +40,7 @@ class Player extends React.Component {
     player: "stopped",
     currentTime: null,
     duration: null,
-    title: null,
+    activeTrack: "",
   };
 
   componentDidMount() {
@@ -53,7 +75,7 @@ class Player extends React.Component {
         this.setState({
           player: "playing",
           duration: this.player.duration,
-          title: activeTrack.title,
+          activeTrack: activeTrack,
         });
       }
     }
@@ -118,36 +140,82 @@ class Player extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     return (
       <>
         <div className="player">
-          <ul className="tracklist">{this.state.title}</ul>
+          <PlayerCard
+            className="tracklist"
+            activeTrack={this.state.activeTrack}
+          />
+
           <TimeBar
             setTime={this.setTime}
             currentTime={this.state.currentTime}
             duration={this.state.duration}
           />
-          {this.state.player !== "stopped" && (
-            <div className="buttons">
-              <button onClick={() => this.handleSkip("previous")}>
-                Previous
-              </button>
-              {this.state.player === "paused" && (
-                <button onClick={() => this.setState({ player: "playing" })}>
-                  Play
-                </button>
-              )}
-              {this.state.player === "playing" && (
-                <button onClick={() => this.setState({ player: "paused" })}>
-                  Pause
-                </button>
-              )}
-              <button onClick={() => this.setState({ player: "stopped" })}>
-                Stop
-              </button>
-              <button onClick={() => this.handleSkip("next")}>Skip</button>
-            </div>
-          )}
+          {
+            // ----Prev -----
+            this.state.player !== "stopped" && (
+              <div className="buttons">
+                <IconButton
+                  onClick={() => this.handleSkip("previous")}
+                  aria-label="play"
+                  size="small"
+                  className={classes.button}
+                >
+                  <PrevIcon fontSize="large" />
+                </IconButton>
+                {
+                  // ----Play start -----
+                  this.state.player === "paused" && (
+                    <IconButton
+                      onClick={() => this.setState({ player: "playing" })}
+                      aria-label="play"
+                      size="small"
+                      className={classes.button}
+                    >
+                      <PlayIcon fontSize="large" />
+                    </IconButton>
+                  )
+                  // ----Play end -----
+                }
+                {
+                  // ----Paused start -----
+                  this.state.player === "playing" && (
+                    <IconButton
+                      onClick={() => this.setState({ player: "paused" })}
+                      aria-label="play"
+                      size="small"
+                      className={classes.button}
+                    >
+                      <PauseIcon fontSize="large" />
+                    </IconButton>
+                  )
+                  // ----Paused end -----
+                  // ----STOP start -----
+                }
+                <IconButton
+                  onClick={() => this.setState({ player: "stopped" })}
+                  aria-label="play"
+                  size="small"
+                  className={classes.button}
+                >
+                  <StopIcon fontSize="large" />
+                </IconButton>
+
+                <IconButton
+                  onClick={() => this.handleSkip("next")}
+                  aria-label="play"
+                  size="small"
+                  className={classes.button}
+                >
+                  <NextIcon fontSize="large" />
+                </IconButton>
+              </div>
+            )
+          }
         </div>
         <audio ref={(ref) => (this.player = ref)} />
       </>
@@ -172,12 +240,12 @@ function TimeBar({ currentTime, duration, setTime }) {
         style={{
           float: "left",
           cursor: "pointer",
-          height: "30px",
+          height: "5px",
           width: `${300 / Math.round(duration)}px`,
           background:
             currentTime && Math.round(currentTime) === second
               ? "white"
-              : "black",
+              : "rgb(8, 97, 112)",
           transition: "all 0.5s ease-in-out",
         }}
       />
@@ -205,4 +273,6 @@ const mapStateToProps = (state) => ({
   toggleActive: state.toggleActiveReducer.toggleActive,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default withStyles(useStyles)(
+  connect(mapStateToProps, mapDispatchToProps)(Player)
+);

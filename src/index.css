@@ -95,7 +95,6 @@
 /* --------------------------Player ----------------------------- */
 .player-list {
   display: flex;
-  justify-content: space-between;
 }
 
 .player {
@@ -108,9 +107,9 @@
   float: left;
   width: 100%;
   font-size: 16px;
-  margin: 0;
+  margin: 10px;
   padding: 0;
-  height: 400px;
+  
   overflow-y: scroll;
 }
 
@@ -132,24 +131,24 @@
 .buttons button {
   float: left;
   width: 100px;
-  height: 30px;
+  height: 80px;
   font-size: 16px;
   cursor: pointer;
   border: 0;
-  background: white;
+  
 }
 
 .buttons button:hover {
-  background: salmon;
+  /* background: salmon; */
   font-weight: bold;
 }
 
 .timebar {
   float: left;
   width: 100%;
-  height: 30px;
-  background: black;
-  color: white;
+  height: 5px;
+  background: rgb(8, 97, 112);
+  color: rgb(231, 71, 151);
 }
 
 .bar {
