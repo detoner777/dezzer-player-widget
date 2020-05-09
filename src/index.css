@@ -29,10 +29,19 @@
   flex-direction: row;
   justify-content: space-between;
 }
-
-.body  {
-  background: #666;
+*  
+    { 
+    margin: 0; 
+    padding: 0; 
+    border: 0; 
 }
+
+ html {
+  background: #16171a;
+}
+
+
+
 
 /* ----------------------------------Search Bar----------------------------------------- */
 
@@ -42,13 +51,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 2rem;
+  margin-top: 3rem;
+  color:white;
 }
 
-.search__form {
-  display: flex;
-  flex: column;
-  max-width: 300px;
-}
+
 
 /* ------------------------------------Song+SongList-------------------------------------- */
 
@@ -66,6 +73,7 @@
   justify-content: space-between;
   margin: 5px;
   padding: 5px;
+  color: white;
   border-bottom: 1px solid rgb(139, 122, 122);
   box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }

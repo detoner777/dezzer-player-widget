@@ -21,6 +21,7 @@ const useStyles = (theme) => ({
     alignItems: "center",
     "& > *": {
       margin: theme.spacing(1),
+      color: "white",
     },
   },
 });

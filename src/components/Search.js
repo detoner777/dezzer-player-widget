@@ -9,14 +9,37 @@ import { fetchSongsError } from "../actions/fetchLoadingErr";
 
 //input styling
 const useStyles = makeStyles((theme) => ({
-  input: {
+  root: {
     "& > *": {
       margin: theme.spacing(1),
       width: "25ch",
     },
+    "& label.Mui-focused": {
+      color: "white",
+    },
+    "& label": {
+      color: "grey",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "green",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "grey",
+      },
+      "&:hover fieldset": {
+        borderColor: "yellow",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#f50057",
+      },
+    },
+  },
+  input: {
+    color: "white",
   },
   button: {
-    width: "100px",
+    width: "20px",
     height: "56px",
   },
 }));
@@ -42,25 +65,27 @@ const Search = (props) => {
 
   return (
     <div className="search">
-      <form className={classes.input} noValidate autoComplete="off">
+      <form className={classes.root} noValidate autoComplete="off">
         <TextField
-          id="outlined-secondary"
-          label="Tab an artist"
+          id="outlined-search"
+          label="Search artist"
+          type="search"
           variant="outlined"
-          color="secondary"
-          value={searchValue}
           onChange={handleSearchInputChanges}
+          InputProps={{
+            className: classes.input,
+          }}
         />
+
         <Button
           className={classes.button}
           variant="outlined"
           color="secondary"
-          endIcon={<SearchIcon />}
           type="submit"
           value="SEARCH"
           onClick={callSearchFunction}
         >
-          Search
+          <SearchIcon style={{ fontSize: 30 }} />
         </Button>
       </form>
     </div>

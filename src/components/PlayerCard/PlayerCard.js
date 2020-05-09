@@ -36,7 +36,7 @@ const MediaControlCard = ({ activeTrack }) => {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h7" variant="h7">
-            {!activeTrack ? "LOL" : activeTrack.title}
+            {!activeTrack ? "" : activeTrack.title}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             {!activeTrack ? "" : activeTrack.artist.name}

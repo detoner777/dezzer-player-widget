@@ -1,4 +1,8 @@
 import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
+import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
+
 import Search from "./components/Search";
 import SongsList from "./components/SongsLis";
 import { connect } from "react-redux";
@@ -11,7 +15,24 @@ const App = ({ fetchSongs, loading, errorMessage, songsList }) => {
   };
 
   return (
-    <div className="container">
+    <React.Fragment>
+      <Container maxWidth="md" style={{ backgroundColor: "#16171a" }}>
+        <Search search={search} />
+        <div className="main-wrapper">
+          <Player songsList={songsList} />
+          <SongsList
+            loading={loading}
+            errorMessage={errorMessage}
+            songsList={songsList}
+          />
+        </div>
+      </Container>
+    </React.Fragment>
+  );
+};
+
+{
+  /* <div className="container">
       <Search search={search} />
       <div className="main-wrapper">
         <Player songsList={songsList} />
@@ -21,9 +42,8 @@ const App = ({ fetchSongs, loading, errorMessage, songsList }) => {
           songsList={songsList}
         />
       </div>
-    </div>
-  );
-};
+    </div> */
+}
 
 const mapDispatchToProps = {
   fetchSongs,
