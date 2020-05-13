@@ -22,6 +22,7 @@ const useStyles = (theme) => ({
     "& > *": {
       margin: theme.spacing(1),
       color: "white",
+      background: "none",
     },
   },
 });
@@ -145,9 +146,9 @@ class Player extends React.Component {
 
     return (
       <>
-        <div className="player">
+        <div className='player'>
           <PlayerCard
-            className="tracklist"
+            className='tracklist'
             activeTrack={this.state.activeTrack}
           />
 
@@ -159,25 +160,25 @@ class Player extends React.Component {
           {
             // ----Prev -----
             this.state.player !== "stopped" && (
-              <div className="buttons">
+              <div className='buttons'>
                 <IconButton
                   onClick={() => this.handleSkip("previous")}
-                  aria-label="play"
-                  size="small"
+                  aria-label='play'
+                  size='small'
                   className={classes.button}
                 >
-                  <PrevIcon fontSize="large" />
+                  <PrevIcon fontSize='large' />
                 </IconButton>
                 {
                   // ----Play start -----
                   this.state.player === "paused" && (
                     <IconButton
                       onClick={() => this.setState({ player: "playing" })}
-                      aria-label="play"
-                      size="small"
+                      aria-label='play'
+                      size='small'
                       className={classes.button}
                     >
-                      <PlayIcon fontSize="large" />
+                      <PlayIcon fontSize='large' />
                     </IconButton>
                   )
                   // ----Play end -----
@@ -187,11 +188,11 @@ class Player extends React.Component {
                   this.state.player === "playing" && (
                     <IconButton
                       onClick={() => this.setState({ player: "paused" })}
-                      aria-label="play"
-                      size="small"
+                      aria-label='play'
+                      size='small'
                       className={classes.button}
                     >
-                      <PauseIcon fontSize="large" />
+                      <PauseIcon fontSize='large' />
                     </IconButton>
                   )
                   // ----Paused end -----
@@ -199,20 +200,20 @@ class Player extends React.Component {
                 }
                 <IconButton
                   onClick={() => this.setState({ player: "stopped" })}
-                  aria-label="play"
-                  size="small"
+                  aria-label='play'
+                  size='small'
                   className={classes.button}
                 >
-                  <StopIcon fontSize="large" />
+                  <StopIcon fontSize='large' />
                 </IconButton>
 
                 <IconButton
                   onClick={() => this.handleSkip("next")}
-                  aria-label="play"
-                  size="small"
+                  aria-label='play'
+                  size='small'
                   className={classes.button}
                 >
-                  <NextIcon fontSize="large" />
+                  <NextIcon fontSize='large' />
                 </IconButton>
               </div>
             )
@@ -253,10 +254,10 @@ function TimeBar({ currentTime, duration, setTime }) {
     );
   });
   return (
-    <div className="timebar">
-      <div className="bar">{seconds}</div>
+    <div className='timebar'>
+      <div className='bar'>{seconds}</div>
       {currentTime ? (
-        <div className="time">
+        <div className='time'>
           {formattedCurrentTime} / {formattedDuration}
         </div>
       ) : (

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         borderColor: "grey",
       },
       "&:hover fieldset": {
-        borderColor: "yellow",
+        borderColor: "white",
       },
       "&.Mui-focused fieldset": {
         borderColor: "#f50057",
@@ -64,13 +64,13 @@ const Search = (props) => {
   };
 
   return (
-    <div className="search">
-      <form className={classes.root} noValidate autoComplete="off">
+    <div className='search'>
+      <form className={classes.root} noValidate autoComplete='off'>
         <TextField
-          id="outlined-search"
-          label="Search artist"
-          type="search"
-          variant="outlined"
+          id='outlined-search'
+          label='Search artist'
+          type='search'
+          variant='outlined'
           onChange={handleSearchInputChanges}
           InputProps={{
             className: classes.input,
@@ -79,10 +79,10 @@ const Search = (props) => {
 
         <Button
           className={classes.button}
-          variant="outlined"
-          color="secondary"
-          type="submit"
-          value="SEARCH"
+          variant='outlined'
+          color='secondary'
+          type='submit'
+          value='SEARCH'
           onClick={callSearchFunction}
         >
           <SearchIcon style={{ fontSize: 30 }} />
