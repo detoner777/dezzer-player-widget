@@ -5,10 +5,6 @@ import { connect } from "react-redux";
 import { setToggleActive } from "../actions/SetToggleActive";
 
 class SongsList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       loading,

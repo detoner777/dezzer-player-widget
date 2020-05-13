@@ -29,6 +29,22 @@
   flex-direction: row;
   justify-content: space-between;
 }
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+  background: #16171a;
+}
+
+.search-player-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+}
 
 /* ----------------------------------Search Bar----------------------------------------- */
 
@@ -38,12 +54,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 2rem;
-}
-
-.search__form {
-  display: flex;
-  flex: column;
-  max-width: 300px;
+  margin-top: 3rem;
+  color: white;
 }
 
 /* ------------------------------------Song+SongList-------------------------------------- */
@@ -62,6 +74,7 @@
   justify-content: space-between;
   margin: 5px;
   padding: 5px;
+  color: white;
   border-bottom: 1px solid rgb(139, 122, 122);
   box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
@@ -91,7 +104,6 @@
 /* --------------------------Player ----------------------------- */
 .player-list {
   display: flex;
-  justify-content: space-between;
 }
 
 .player {
@@ -104,9 +116,8 @@
   float: left;
   width: 100%;
   font-size: 16px;
-  margin: 0;
+  margin: 10px;
   padding: 0;
-  height: 400px;
   overflow-y: scroll;
 }
 
@@ -121,31 +132,34 @@
 }
 
 .buttons {
-  float: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
+  margin-top: 15px;
 }
 
 .buttons button {
   float: left;
-  width: 100px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   font-size: 16px;
   cursor: pointer;
   border: 0;
-  background: white;
 }
 
 .buttons button:hover {
-  background: salmon;
+  background: rgba(81, 47, 126, 0.3);
+
   font-weight: bold;
 }
 
 .timebar {
   float: left;
   width: 100%;
-  height: 30px;
-  background: black;
-  color: white;
+  height: 5px;
+  background: rgb(8, 97, 112);
+  color: rgb(231, 71, 151);
 }
 
 .bar {
