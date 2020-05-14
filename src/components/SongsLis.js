@@ -22,7 +22,6 @@ const SongsList = (props) => {
         ) : (
           songsList.map((song, index) => (
             <Song
-              autoFocus={true}
               key={`${index}`}
               song={song}
               index={index}
