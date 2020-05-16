@@ -25,6 +25,9 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    "@media (max-width: 780px)": {
+      flexDirection: "column",
+    },
   },
 });
 
@@ -37,7 +40,7 @@ const App = ({ fetchSongs, loading, errorMessage, songsList }) => {
 
   return (
     <React.Fragment>
-      <Container maxWidth='md' style={{ backgroundColor: "#16171a" }}>
+      <Container maxWidth='md' style={{ backgroundColor: "#1f2024" }}>
         <Card className={classes.root}>
           <CardContent className={classes.cardcontent}>
             <div className='search-player-wrapper'>
@@ -55,20 +58,6 @@ const App = ({ fetchSongs, loading, errorMessage, songsList }) => {
     </React.Fragment>
   );
 };
-
-{
-  /* <div className="container">
-      <Search search={search} />
-      <div className="main-wrapper">
-        <Player songsList={songsList} />
-        <SongsList
-          loading={loading}
-          errorMessage={errorMessage}
-          songsList={songsList}
-        />
-      </div>
-    </div> */
-}
 
 const mapDispatchToProps = {
   fetchSongs,

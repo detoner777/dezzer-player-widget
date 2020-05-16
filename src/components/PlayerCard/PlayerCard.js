@@ -8,9 +8,11 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    borderTop: "1px groove grey",
     justifyContent: "space-between",
     maxHeight: 100,
-    background: "none",
+    background: "#212226",
+    boxShadow: "0.3em 0.3em 1em rgba(0, 0, 0, 0.3)",
   },
   details: {
     display: "flex",

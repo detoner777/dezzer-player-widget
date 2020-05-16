@@ -1,49 +1,50 @@
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 3px;
+  width: 9px;
+  height: 1px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #999;
+  background-color: none;
 }
 ::-webkit-scrollbar-track-piece {
-  background-color: #ffffff;
+  background-color: none;
 }
 ::-webkit-scrollbar-thumb {
-  height: 50px;
+  height: 10px;
   background-color: rgb(172, 193, 207);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-corner {
-  background-color: #999;
+  background-color: none;
 }
 ::-webkit-resizer {
-  background-color: #666;
+  background-color: none;
 }
 
-.container {
-  max-width: 900px;
-  margin-top: 50px;
-}
-.main-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 * {
   margin: 0;
   padding: 0;
   border: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 html {
-  background: #16171a;
+  background: #1f2024;
 }
 
 .search-player-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 300px;
+  height: 350px;
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 1, 0.3);
+}
+
+@media only screen and (max-width: 780px) {
+  .search-player-wrapper {
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 /* ----------------------------------Search Bar----------------------------------------- */
@@ -62,7 +63,7 @@ html {
 
 .songs__list {
   width: 300px;
-  height: 400px;
+  height: 380px;
   overflow-y: scroll;
 }
 
@@ -97,8 +98,8 @@ html {
 .song__title {
   width: 100px;
   overflow: hidden;
-  height: 40px;
-  line-height: 40px;
+  height: 20px;
+  line-height: 20px;
 }
 
 /* --------------------------Player ----------------------------- */
@@ -109,7 +110,6 @@ html {
 .player {
   float: left;
   width: 400px;
-  font-family: arial;
 }
 
 .tracklist {
@@ -137,6 +137,7 @@ html {
   justify-content: space-between;
   width: 100%;
   margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .buttons button {
