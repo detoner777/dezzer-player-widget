@@ -1,6 +1,6 @@
 import React from "react";
 
-const Song = ({ song, index, active, setToggleActive }) => {
+const Song = ({ song, index, active, setToggleActive, refs }) => {
   function timeFormat(time) {
     let hrs = ~~(time / 3600);
     let mins = ~~((time % 3600) / 60);
@@ -18,9 +18,10 @@ const Song = ({ song, index, active, setToggleActive }) => {
     <div
       className={active ? "song__active" : "song"}
       onClick={() => setToggleActive((active = index))}
+      ref={refs}
     >
       <span>{index + 1}</span>
-      <span className="song__title">{song.title}</span>
+      <span className='song__title'>{song.title}</span>
 
       <span>{timeFormat(song.duration)}</span>
     </div>

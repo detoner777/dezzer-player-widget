@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Song from "./Song";
 
 import { connect } from "react-redux";
@@ -12,8 +12,34 @@ const SongsList = (props) => {
     toggleActive,
     setToggleActive,
   } = props;
+
+  const refs = songsList.reduce((song, value) => {
+    song[value.id] = React.createRef();
+    return song;
+  }, {});
+  console.log(refs);
+
+  const handleClick = (id) =>
+    refs[id].current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
   return (
     <div className='player-list'>
+      <ul>
+        {/*  */}
+
+        {songsList.map((song) => (
+          <li key={song.id}>
+            <button type='button' onClick={() => handleClick(song.id)}>
+              Scroll Item {song.id} Into View
+            </button>
+          </li>
+        ))}
+
+        {/*  */}
+      </ul>
       <div className='songs__list'>
         {loading && !errorMessage ? (
           <span>Loading...</span>
@@ -24,6 +50,7 @@ const SongsList = (props) => {
             <Song
               key={`${index}`}
               song={song}
+              refs={refs[song.id]}
               index={index}
               active={toggleActive === index}
               setToggleActive={() => {
