@@ -32,17 +32,16 @@ const useStyles = makeStyles((theme) => ({
 
 const MediaControlCard = ({ activeTrack }) => {
   const classes = useStyles();
-
-  console.log(activeTrack);
+  // console.log(activeTrack);
 
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography component='h7' variant='h7'>
+          <Typography component="h7" variant="h7">
             {!activeTrack ? "" : activeTrack.title}
           </Typography>
-          <Typography variant='subtitle1' style={{ color: "grey" }}>
+          <Typography variant="subtitle1" style={{ color: "grey" }}>
             {!activeTrack ? "" : activeTrack.artist.name}
           </Typography>
         </CardContent>
@@ -50,7 +49,7 @@ const MediaControlCard = ({ activeTrack }) => {
       <CardMedia
         className={classes.cover}
         image={!activeTrack ? "" : activeTrack.album.cover_medium}
-        title='Live from space album cover'
+        title="Live from space album cover"
       />
     </Card>
   );

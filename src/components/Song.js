@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const Song = ({ song, index, active, setToggleActive, refs }) => {
+const Song = ({ song, index, active, setToggleActive, refs, scrollView }) => {
+  const scroll = () => (active ? scrollView(song.id) : undefined);
+  useEffect(() => scroll());
+
   function timeFormat(time) {
     let hrs = ~~(time / 3600);
     let mins = ~~((time % 3600) / 60);
@@ -21,7 +24,7 @@ const Song = ({ song, index, active, setToggleActive, refs }) => {
       ref={refs}
     >
       <span>{index + 1}</span>
-      <span className='song__title'>{song.title}</span>
+      <span className="song__title">{song.title}</span>
 
       <span>{timeFormat(song.duration)}</span>
     </div>
