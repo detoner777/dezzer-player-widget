@@ -17,7 +17,7 @@ const SongsList = (props) => {
     song[value.id] = React.createRef();
     return song;
   }, {});
-  console.log(refs);
+  // console.log(refs);
 
   const handleClick = (id) =>
     refs[id].current.scrollIntoView({
@@ -26,31 +26,21 @@ const SongsList = (props) => {
     });
 
   return (
-    <div className='player-list'>
-      <ul>
-        {/*  */}
-
-        {songsList.map((song) => (
-          <li key={song.id}>
-            <button type='button' onClick={() => handleClick(song.id)}>
-              Scroll Item {song.id} Into View
-            </button>
-          </li>
-        ))}
-
-        {/*  */}
-      </ul>
-      <div className='songs__list'>
+    <div className="player-list">
+      <div className="songs__list">
         {loading && !errorMessage ? (
           <span>Loading...</span>
         ) : errorMessage ? (
-          <div className='errorMessage'>{errorMessage}</div>
+          <div className="errorMessage">{errorMessage}</div>
         ) : (
           songsList.map((song, index) => (
             <Song
               key={`${index}`}
               song={song}
               refs={refs[song.id]}
+              scrollView={() => {
+                handleClick(song.id);
+              }}
               index={index}
               active={toggleActive === index}
               setToggleActive={() => {
