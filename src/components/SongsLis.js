@@ -29,7 +29,7 @@ const SongsList = (props) => {
     <div className="player-list">
       <div className="songs__list">
         {loading && !errorMessage ? (
-          <span>Loading...</span>
+          <span className="loading">Loading...</span>
         ) : errorMessage ? (
           <div className="errorMessage">{errorMessage}</div>
         ) : (

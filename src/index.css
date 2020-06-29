@@ -44,6 +44,7 @@ html {
   .search-player-wrapper {
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
   }
 }
 
@@ -65,6 +66,21 @@ html {
   width: 300px;
   height: 380px;
   overflow-y: scroll;
+  margin: 0 auto;
+}
+
+.songs__list .loading {
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.songs__list .errorMessage {
+  color: #f50057;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
 }
 
 .song {
@@ -78,6 +94,7 @@ html {
   color: white;
   border-bottom: 1px solid rgb(139, 122, 122);
   box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 .song__active {
@@ -101,6 +118,7 @@ html {
   height: 20px;
   line-height: 20px;
   cursor: default;
+  cursor: pointer;
 }
 
 /* --------------------------Player ----------------------------- */
